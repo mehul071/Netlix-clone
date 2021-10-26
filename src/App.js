@@ -8,13 +8,17 @@ import {
 } from 'react-router-dom'
 import Login from './screens/Login';
 import { auth } from './firebase';
-import {logout,login} from './features/useSlice';
-import { useDispatch } from 'react-redux';
+import {logout,login, selectUser} from './features/userSlice';
+import {useDispatch, useSelector } from 'react-redux';
+import ProfileScreen from './screens/ProfileScreen'
 
 function App() {
-  const user = null;
+  const user = useSelector(selectUser);
+  
   const dispatch = useDispatch();
-  useEffect(()=>{
+  try{
+    
+    useEffect(()=>{
       const unsubscribe = auth.onAuthStateChanged((userAuth)=>{
       if(userAuth)
       {
@@ -24,24 +28,31 @@ function App() {
         })
       );
       }else{
-        dispatch(logout);
+        dispatch(logout());
       }
     });
     return unsubscribe;
-  },[])
+  },[dispatch])
 
+  }
+  catch(error)
+  {
+    console.log(error)
+  }
+  
   return (
     <div className="app">
       <Router>
         {!user ? (
-          <Route exact path='/login'> 
             <Login/>
-          </Route>
         ):(
           <Switch>
-          <Route exact path='/'>
-            <HomeScreen />
-          </Route>
+            <Route path="/profile">
+              <ProfileScreen />
+            </Route>
+            <Route exact path='/'>
+              <HomeScreen />
+            </Route>
           </Switch> 
         )}
       </Router>
