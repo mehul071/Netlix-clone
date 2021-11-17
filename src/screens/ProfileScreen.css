@@ -17,7 +17,7 @@
 
 .profieScreen_info{
     display:flex;
-    margin-top:1.4rem;
+    /* margin-top:1.4rem; */
 }
 .profileScreen-body >h1{
     font-size: 60px;
@@ -28,11 +28,26 @@
 .profileScreen_details{
     color:white;
     flex:1;
-    margin-left:1rem;
+    margin-left:25px;
 }
 .profileScreen_details > h2{
     background-color:gray;
     padding:15px;
     font-size:15px;
     padding-left:20px;
+}
+.profileScreen_signout {
+    padding:10px 20px;
+    font-size:1rem;
+    margin-top:5%;
+    width:100%;
+    cursor:pointer;
+    color:white;
+    background-color:#e50914;
+    border:none;
+    outline:none;
+}
+.profileScreen_plans >h3{
+    border-bottom:1px solid #282c2d;
+    padding-bottom:10px;
 }
